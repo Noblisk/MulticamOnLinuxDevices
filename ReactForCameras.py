@@ -152,7 +152,7 @@ while True:
 
   # Check if motion was found/still active flag
 
-  print('There are ' + sum + ' motion sensors activated')
+  print('There are ', sum, ' motion sensors activated')
 
   # Define how many camera slots are needed
   if sum == 1:
