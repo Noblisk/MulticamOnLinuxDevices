@@ -34,6 +34,11 @@ actv2 = False
 actv3 = False
 actv4 = False
 
+p1 = ''
+p2 = ''
+p3 = ''
+p4 = ''
+
 slot = '[0:v:0][1:v:0][2:v:0][3:v:0]'
 
 # Define 5sec "flag" timer
@@ -50,7 +55,7 @@ def countdown1():
             found_cam1 = False # If camera wasn't found after countdown, tag the boolean as false
         time.sleep(.1)
     if found_cam1 == False:
-        actv1 = False # Remove camera from output
+        p1 = '' # Remove camera from output
 
 def countdown2():
     # Print the countdown
@@ -65,7 +70,7 @@ def countdown2():
             found_cam2 = False # If camera wasn't found after countdown, tag the boolean as false
         time.sleep(.1)
     if found_cam2 == False:
-        actv2 = False # Remove camera from output
+        p2 = '' # Remove camera from output
 
 def countdown3():
     # Print the countdown
@@ -80,7 +85,7 @@ def countdown3():
             found_cam3 = False # If camera wasn't found after countdown, tag the boolean as false
         time.sleep(.1)
     if found_cam3 == False:
-        actv3 = False # Remove camera from output
+        p3 = '' # Remove camera from output
 
 def countdown4():
     # Print the countdown
@@ -95,7 +100,7 @@ def countdown4():
             found_cam4 = False # If camera wasn't found after countdown, tag the boolean as false
         time.sleep(.1)
     if found_cam4 == False:
-        actv4 = False # Remove camera from output
+        p4 = '' # Remove camera from output
 
 
 
@@ -166,17 +171,17 @@ while True:
   elif sum == 0:
     slot = '[0:v:0][1:v:0][2:v:0][3:v:0]'
 
-  if actv1 == False:
-    p1 = ''
+  # if actv1 == False:
+  #   p1 = ''
 
-  if actv2 == False:
-    p2 = ''
+  # if actv2 == False:
+  #   p2 = ''
   
-  if actv3 == False:
-    p3 = ''
+  # if actv3 == False:
+  #   p3 = ''
 
-  if actv4 == False:
-    p4 = ''
+  # if actv4 == False:
+  #   p4 = ''
   
 
   # Default position of all cameras
@@ -194,7 +199,8 @@ while True:
 
     # Run new process
     time.sleep(1)
-    subprocess.run(prep_process)
+    #subprocess.Popen(prep_process)
+    print(prep_process)
 
     # Prepared process gets transformed into Running process, the Running process gets now activated
     running_process = prep_process
