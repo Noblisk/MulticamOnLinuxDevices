@@ -175,7 +175,6 @@ while True:
     # Run new process
     time.sleep(1)
     subprocess.run(["gnome-terminal", "-x", "bash", "-c", prep_process]) # Opens new terminal window that starts the new video output
-    #subprocess.Popen(prep_process)
     print(prep_process) # Control output of the process syntax 
 
     # The most recently started process gets transformed into Running process
