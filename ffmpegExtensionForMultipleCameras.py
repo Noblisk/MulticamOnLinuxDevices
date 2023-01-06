@@ -14,14 +14,15 @@ import signal
 
 # ---> Set up the serial connection <---
 ser = serial.Serial('/dev/ttyACM0', 9600)
+line = ser.readline()
 
 # ---> Main camera paths <---
 # If cams not matching, use command and rewrite the cam paths
 # "v4l2-ctl --list-devices"
-cam1 = '/dev/video0 '
-cam2 = '/dev/video2 '
-cam3 = '/dev/video4 '
-cam4 = '/dev/video6 '
+cam1 = '/dev/video0' + ' '
+cam2 = '/dev/video2' + ' '
+cam3 = '/dev/video4' + ' '
+cam4 = '/dev/video6' + ' '
 # If no video loopback, use command
 # "sudo modprobe v4l2loopback video_nr=1"
 # Then check the path of the new video loopback and rewrite the virtual_cam path
@@ -64,49 +65,49 @@ while True:
   line_str = line.decode('utf-8')
 
   # Camera 1.
-  if line_str == "cam1\n": # When cam1 phraze found in serial arduino output
+  if "cam1" in line_str: # When cam1 phraze found in serial arduino output
     actv1 = True # Gives "flag" to camera
   else:
     actv1 = False # cam1 starts to lose it's flag
 
   # Camera 2.
-  if line_str == "cam2\n":
+  if "cam2" in line_str:
     actv2 = True
   else:
     actv2 = False
 
   # Camera 3.
-  if line_str == "cam3\n":
+  if "cam3" in line_str:
     actv3 = True
   else:
     actv3 = False
 
   # Camera 4.
-  if line_str == "cam4\n":
+  if "cam4" in line_str:
     actv4 = True
   else:
     actv4 = False
 
   # ---> Run countdown to check if dropped flags will get regained <--- 
-  for i in range(20, 0, -1):
-    if activ1 == False:
-        if line_str == "cam1": # If camera was found, tag the boolean as true, the countdown cancels
-            activ1 = True # Renew flag
-            print('Cam1 found') # Control output when cam1 not found
-    if activ2 == False:
-        if line_str == "cam2":
-            activ2 = True 
-            print('Cam2 found')
-    if activ3 == False:
-        if line_str == "cam3":
-            activ3 = True 
-            print('Cam3 found')
-    if activ4 == False:
-        if line_str == "cam4":
-            activ4 = True 
-            print('Cam4 found')
-    else:
-        break
+  if actv1 == False or actv2 == False or actv3 == False or actv4 == False:
+    for i in range(20, 0, -1):
+      line_str = line.decode('utf-8')
+      if activ1 == False:
+          if "cam1" in line_str: # If camera was found, tag the boolean as true, the countdown cancels
+              activ1 = True # Renew flag
+              print('Cam1 found') # Control output when cam1 not found
+      if activ2 == False:
+          if "cam2" in line_str:
+              activ2 = True 
+              print('Cam2 found')
+      if activ3 == False:
+          if "cam3" in line_str:
+              activ3 = True 
+              print('Cam3 found')
+      if activ4 == False:
+          if "cam4" in line_str:
+              activ4 = True 
+              print('Cam4 found')
 
   # ---> Check if flag active or dropped <----
   if actv1:
