@@ -39,10 +39,10 @@ icam4 = '-thread_queue_size 100 -i ' + cam4
 running_process = ''
 
 # ---> Create booleans for 5sec "flag" timer <---
-actv1 = False
-actv2 = False
-actv3 = False
-actv4 = False
+active1 = False
+active2 = False
+active3 = False
+active4 = False
 
 # ---> Define placeholders for active, held or disabled cameras for end-process syntax <---
 # "p" variables are being filled while the cam is active or held by flag
@@ -66,69 +66,69 @@ while True:
 
   # Camera 1.
   if "cam1" in line_str: # When cam1 phraze found in serial arduino output
-    actv1 = True # Gives "flag" to camera
+    active1 = True # Gives "flag" to camera
   else:
-    actv1 = False # cam1 starts to lose it's flag
+    active1 = False # cam1 starts to lose it's flag
 
   # Camera 2.
   if "cam2" in line_str:
-    actv2 = True
+    active2 = True
   else:
-    actv2 = False
+    active2 = False
 
   # Camera 3.
   if "cam3" in line_str:
-    actv3 = True
+    active3 = True
   else:
-    actv3 = False
+    active3 = False
 
   # Camera 4.
   if "cam4" in line_str:
-    actv4 = True
+    active4 = True
   else:
-    actv4 = False
+    active4 = False
 
   # ---> Run countdown to check if dropped flags will get regained <--- 
-  if actv1 == False or actv2 == False or actv3 == False or actv4 == False:
+  if active1 == False or active2 == False or active3 == False or active4 == False:
     for i in range(20, 0, -1):
       line_str = line.decode('utf-8')
-      if activ1 == False:
+      if active1 == False:
           if "cam1" in line_str: # If camera was found, tag the boolean as true, the countdown cancels
-              activ1 = True # Renew flag
+              active1 = True # Renew flag
               print('Cam1 found') # Control output when cam1 not found
-      if activ2 == False:
+      if active2 == False:
           if "cam2" in line_str:
-              activ2 = True 
+              active2 = True 
               print('Cam2 found')
-      if activ3 == False:
+      if active3 == False:
           if "cam3" in line_str:
-              activ3 = True 
+              active3 = True 
               print('Cam3 found')
-      if activ4 == False:
+      if active4 == False:
           if "cam4" in line_str:
-              activ4 = True 
+              active4 = True 
               print('Cam4 found')
 
   # ---> Check if flag active or dropped <----
-  if actv1:
+  if active1:
     p1 = icam1 # Add camera path to end-process
     sum += 1 # Reserve a slot for cam in final video output
   else:
     p1 = '' # Remove camera path from end-process
 
-  if actv2:
+  if active2:
     p2 = icam2
     sum += 1
   else:
     p2 = ''
   
-  if actv3:
+  if active3:
     p3 = icam3
     sum += 1
   else:
     p3 = ''
 
-  if actv4:
+  if active4:
     p4 = icam4
     sum += 1
   else:
